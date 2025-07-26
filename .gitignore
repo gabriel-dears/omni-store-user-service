@@ -35,7 +35,6 @@ wrapper/
 generated/
 
 # Logs
-*.log
 logs/
 *.tmp
 
@@ -60,9 +59,6 @@ surefire-reports/
 
 # Virtual machines
 *.hprof
-
-# JetBrains Rider
-.idea/
 
 # Kotlin compile cache
 .kotlinc/
