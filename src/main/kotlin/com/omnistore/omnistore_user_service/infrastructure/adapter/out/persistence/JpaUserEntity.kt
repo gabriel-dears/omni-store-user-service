@@ -37,4 +37,16 @@ data class JpaUserEntity(
 
     @Column(name = "created_at", nullable = false, updatable = false)
     var createdAt: Instant? = null
-)
+) {
+    @PrePersist
+    fun prePersist() {
+        createdAt = Instant.now()
+        updatedAt = Instant.now()
+    }
+
+    @PreUpdate
+    fun preUpdate() {
+        updatedAt = Instant.now()
+    }
+
+}

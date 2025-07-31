@@ -2,7 +2,7 @@ package com.omnistore.omnistore_user_service.application.service
 
 import com.omnistore.omnistore_user_service.application.port.`in`.use_case.FindByIdUserUseCase
 import com.omnistore.omnistore_user_service.application.port.out.CustomUserRepository
-import com.omnistore.omnistore_user_service.domain.UserNotFoundException
+import com.omnistore.omnistore_user_service.domain.exception.UserNotFoundException
 import com.omnistore.omnistore_user_service.domain.model.User
 import java.util.UUID
 
@@ -12,6 +12,6 @@ class FindByIdUserUseCaseImpl(val customUserRepository: CustomUserRepository) : 
         if (user == null) {
             throw UserNotFoundException("User with id $id not found")
         }
-        return user;
+        return user
     }
 }

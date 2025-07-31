@@ -6,4 +6,5 @@ import java.util.*
 interface CustomUserRepository {
     fun findById(id: UUID): User?
     fun createUser(user: User): User
+    fun existByEmail(email: String): Boolean
 }

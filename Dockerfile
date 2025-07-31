@@ -27,6 +27,7 @@ COPY --from=builder /app/build/libs/*.jar app.jar
 
 # Expose port used by the app
 EXPOSE 8081
+EXPOSE 5005
 
 # Run the app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005", "-jar", "app.jar"]

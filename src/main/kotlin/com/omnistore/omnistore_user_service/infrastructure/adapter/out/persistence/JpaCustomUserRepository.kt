@@ -24,4 +24,8 @@ class JpaCustomUserRepository(
         return JpaUserMapper.toDomain(createdJpaUserEntity)
     }
 
+    override fun existByEmail(email: String): Boolean {
+        return jpaUserRepository.existsByEmail(email)
+    }
+
 }
