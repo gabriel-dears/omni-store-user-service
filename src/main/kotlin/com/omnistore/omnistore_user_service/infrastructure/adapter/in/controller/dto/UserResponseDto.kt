@@ -3,5 +3,5 @@ package com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.control
 data class UserResponseDto(
     val id: String,
     val email: String,
-    val name: String
+    val name: String,
 )

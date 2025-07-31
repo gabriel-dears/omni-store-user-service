@@ -12,12 +12,16 @@ class JpaCustomUserRepository(
 ) : CustomUserRepository {
 
     override fun findById(id: UUID): User? {
-        return jpaUserRepository.findById(id).map { JpaUserMapper.toDomain(it) }.orElse(null)
+        return jpaUserRepository
+            .findById(id)
+            .map { JpaUserMapper.toDomain(it) }
+            .orElse(null)
     }
 
     override fun createUser(user: User): User {
-        val savedUserEntity = JpaUserMapper.toEntity(user).let { jpaUserRepository.save(it) }
-        return JpaUserMapper.toDomain(savedUserEntity)
+        val jpaUserEntity = JpaUserMapper.toEntity(user)
+        val createdJpaUserEntity = jpaUserRepository.save(jpaUserEntity)
+        return JpaUserMapper.toDomain(createdJpaUserEntity)
     }
 
 }

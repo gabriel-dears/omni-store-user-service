@@ -4,12 +4,12 @@ import java.time.Instant
 import java.util.UUID
 
 data class User(
-    val id: UUID,
-    var name: String,
-    var email: String,
-    var passwordHash: String,
-    var enabled: Boolean,
-    var role: Role,
-    var createdAt: Instant,
-    var updatedAt: Instant
+    val id: UUID? = null,
+    val name: String,
+    val email: String,
+    val passwordHash: String,
+    val enabled: Boolean = true,
+    val role: Role,
+    val createdAt: Instant? = null,
+    val updatedAt: Instant? = null
 )

@@ -1,6 +1,5 @@
 package com.omnistore.omnistore_user_service.infrastructure.mapper
 
-import com.omnistore.omnistore_user_service.domain.model.Role
 import com.omnistore.omnistore_user_service.domain.model.User
 import com.omnistore.omnistore_user_service.infrastructure.adapter.out.persistence.JpaUserEntity
 
@@ -12,7 +11,7 @@ object JpaUserMapper {
             user.name,
             user.passwordHash,
             user.enabled,
-            user.role.name,
+            user.role,
             user.createdAt,
             user.updatedAt
         )
@@ -25,7 +24,7 @@ object JpaUserMapper {
             jpaUserEntity.name,
             jpaUserEntity.passwordHash,
             jpaUserEntity.enabled,
-            Role.valueOf(jpaUserEntity.role),
+            jpaUserEntity.role,
             jpaUserEntity.createdAt,
             jpaUserEntity.updatedAt
         )
