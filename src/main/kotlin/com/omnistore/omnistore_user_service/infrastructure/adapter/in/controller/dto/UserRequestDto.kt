@@ -6,16 +6,19 @@ import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Size
 
 data class UserRequestDto(
-    @Email
-    @Size(max = 255, min = 20)
-    @NotBlank
+    @field:Email
+    @field:Size(max = 255, min = 20)
+    @field:NotBlank
     val email: String,
-    @NotBlank
-    @Size(max = 255)
+
+    @field:NotBlank
+    @field:Size(max = 255)
     val name: String,
-    @NotBlank
-    @Size(min = 30, max = 255)
+
+    @field:NotBlank
+    @field:Size(min = 30, max = 255)
     val password: String,
-    @Pattern(regexp = "ADMIN|CUSTOMER|MANAGER", message = "Role must be one of: ADMIN, CUSTOMER, MANAGER")
+
+    @field:Pattern(regexp = "ADMIN|CUSTOMER|MANAGER", message = "Role must be one of: ADMIN, CUSTOMER, MANAGER")
     val role: String
 )
