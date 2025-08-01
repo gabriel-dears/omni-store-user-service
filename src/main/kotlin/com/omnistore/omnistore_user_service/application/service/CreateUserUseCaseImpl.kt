@@ -5,7 +5,7 @@ import com.omnistore.omnistore_user_service.application.port.out.CustomUserRepos
 import com.omnistore.omnistore_user_service.domain.exception.EmailAlreadyExistsException
 import com.omnistore.omnistore_user_service.domain.model.User
 
-class CreateUserUseCaseImpl(val customUserRepository: CustomUserRepository) : CreateUserUseCase {
+class CreateUserUseCaseImpl(private val customUserRepository: CustomUserRepository) : CreateUserUseCase {
     override fun execute(user: User): User {
         validateUser(user)
         return customUserRepository.createUser(user)
