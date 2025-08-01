@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.FieldError
+import org.springframework.validation.ObjectError
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -15,23 +16,31 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 class GlobalExceptionHandler {
 
     @ExceptionHandler(EmailAlreadyExistsException::class)
-    fun handleInputErrors(ex: EmailAlreadyExistsException, request: HttpServletRequest): ErrorResponseDto {
-        return ErrorResponseDto(
+    fun handleEmailAlreadyExistsException(
+        ex: EmailAlreadyExistsException,
+        request: HttpServletRequest
+    ): ResponseEntity<ErrorResponseDto> {
+        val errorResponse = ErrorResponseDto(
             status = 400,
-            message = ex.message,
+            message = listOf(ex.message),
             path = request.requestURI,
             timestamp = System.currentTimeMillis().toString()
         )
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse)
     }
 
     @ExceptionHandler(UserNotFoundException::class)
-    fun handleNotFoundErrors(ex: UserNotFoundException, request: HttpServletRequest): ErrorResponseDto {
-        return ErrorResponseDto(
+    fun handleUserNotFoundException(
+        ex: UserNotFoundException,
+        request: HttpServletRequest
+    ): ResponseEntity<ErrorResponseDto> {
+        val errorResponse = ErrorResponseDto(
             status = 404,
-            message = ex.message,
+            message = listOf(ex.message),
             path = request.requestURI,
             timestamp = System.currentTimeMillis().toString()
         )
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse)
     }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
@@ -39,17 +48,10 @@ class GlobalExceptionHandler {
         ex: MethodArgumentNotValidException,
         request: HttpServletRequest
     ): ResponseEntity<ErrorResponseDto> {
-        val errors = ex.bindingResult.allErrors.joinToString("; ") { error ->
-            if (error is FieldError) {
-                "${error.field}: ${error.defaultMessage}"
-            } else {
-                error.defaultMessage ?: "Validation error"
-            }
-        }
-
+        val message = getErrorMessageList(ex.bindingResult.allErrors)
         val errorResponse = ErrorResponseDto(
             status = 400,
-            message = errors,
+            message = message,
             path = request.requestURI,
             timestamp = System.currentTimeMillis().toString()
         )
@@ -61,11 +63,12 @@ class GlobalExceptionHandler {
         ex: MethodArgumentTypeMismatchException,
         request: HttpServletRequest
     ): ResponseEntity<ErrorResponseDto> {
-        val message = "Parameter '${ex.name}' must be of type '${ex.requiredType?.simpleName}', but received: '${ex.value}'"
+        val message =
+            "Parameter '${ex.name}' must be of type '${ex.requiredType?.simpleName}', but received: '${ex.value}'"
 
         val errorResponse = ErrorResponseDto(
             status = 400,
-            message = message,
+            message = listOf(message),
             path = request.requestURI,
             timestamp = System.currentTimeMillis().toString()
         )
@@ -74,14 +77,30 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception::class)
-    fun handleGenericException(ex: Exception, request: HttpServletRequest): ResponseEntity<ErrorResponseDto> {
+    fun handleGenericException(
+        ex: Exception,
+        request: HttpServletRequest
+    ): ResponseEntity<ErrorResponseDto> {
         val errorResponse = ErrorResponseDto(
             status = 500,
-            message = ex.message ?: "Unknown error",
+            message = listOf(ex.message ?: "Unknown error"),
             path = request.requestURI,
             timestamp = System.currentTimeMillis().toString()
         )
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse)
     }
+
+    fun getErrorMessageList(errors: List<ObjectError>): List<String?> {
+        val message = arrayListOf<String?>()
+        for (error in errors) {
+            if (error is FieldError) {
+                message.add("${error.field}: ${error.defaultMessage}")
+            } else {
+                message.add(error.defaultMessage ?: "Validation error")
+            }
+        }
+        return message
+    }
+
 }
