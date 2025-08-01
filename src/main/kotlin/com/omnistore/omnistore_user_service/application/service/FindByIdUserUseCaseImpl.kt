@@ -6,7 +6,7 @@ import com.omnistore.omnistore_user_service.domain.exception.UserNotFoundExcepti
 import com.omnistore.omnistore_user_service.domain.model.User
 import java.util.UUID
 
-class FindByIdUserUseCaseImpl(val customUserRepository: CustomUserRepository) : FindByIdUserUseCase {
+class FindByIdUserUseCaseImpl(private val customUserRepository: CustomUserRepository) : FindByIdUserUseCase {
     override fun execute(id: UUID): User {
         val user = customUserRepository.findById(id)
         if (user == null) {
