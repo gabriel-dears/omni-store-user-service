@@ -4,45 +4,54 @@ import com.omnistore.omnistore_user_service.application.port.out.CustomUserRepos
 import com.omnistore.omnistore_user_service.domain.exception.EmailAlreadyExistsException
 import com.omnistore.omnistore_user_service.domain.model.Role
 import com.omnistore.omnistore_user_service.domain.model.User
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.ArgumentMatchers.any
-import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.any
+import org.mockito.kotlin.whenever
 import kotlin.test.assertEquals
 
 @ExtendWith(MockitoExtension::class)
 class CreateUserUseCaseImplTest {
 
     @Mock
-    private lateinit var customUserRepository: CustomUserRepository
+    lateinit var customUserRepository: CustomUserRepository
 
-    @InjectMocks
-    private lateinit var createUserUseCaseImpl: CreateUserUseCaseImpl
+    lateinit var createUserUseCaseImpl: CreateUserUseCaseImpl
+
+    @BeforeEach
+    fun setUp() {
+        createUserUseCaseImpl = CreateUserUseCaseImpl(customUserRepository)
+    }
 
     @Test
     fun `should fail when email already exists`() {
         // Arrange
-        `when`(customUserRepository.existByEmail(any())).thenReturn(true)
+        whenever(customUserRepository.existByEmail(any())).thenReturn(true)
+
         // Act and Assert
-        assertThrows<EmailAlreadyExistsException> { createUserUseCaseImpl.execute(getUser()) }
+        assertThrows<EmailAlreadyExistsException> {
+            createUserUseCaseImpl.execute(getUser())
+        }
     }
 
     @Test
     fun `should create user`() {
         // Arrange
         val user = getUser()
-        `when`(customUserRepository.createUser(any())).thenReturn(user)
+        whenever(customUserRepository.createUser(any())).thenReturn(user)
+
         // Act
         val createdUser = createUserUseCaseImpl.execute(user)
+
         // Assert
-        assertEquals(createdUser.email, user.email)
-        assertEquals(createdUser.name, user.name)
-        assertEquals(createdUser.enabled, user.enabled)
-        assertEquals(createdUser.role, user.role)
+        assertEquals(user.email, createdUser.email)
+        assertEquals(user.name, createdUser.name)
+        assertEquals(user.enabled, createdUser.enabled)
+        assertEquals(user.role, createdUser.role)
     }
 
     private fun getUser(): User {
@@ -54,5 +63,4 @@ class CreateUserUseCaseImplTest {
             role = Role.CUSTOMER
         )
     }
-
 }
