@@ -13,6 +13,8 @@ RUN gradle build -x test --no-daemon || true
 
 COPY src ./src
 
+RUN gradle test --no-daemon
+
 # Build the application
 RUN gradle bootJar --no-daemon
 
