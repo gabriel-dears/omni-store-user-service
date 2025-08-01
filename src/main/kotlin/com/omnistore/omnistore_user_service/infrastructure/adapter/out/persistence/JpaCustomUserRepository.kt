@@ -28,4 +28,12 @@ class JpaCustomUserRepository(
         return jpaUserRepository.existsByEmail(email)
     }
 
+    override fun existById(id: UUID): Boolean {
+        return jpaUserRepository.existsById(id)
+    }
+
+    override fun delete(id: UUID) {
+        jpaUserRepository.deleteById(id)
+    }
+
 }

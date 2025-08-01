@@ -7,4 +7,6 @@ interface CustomUserRepository {
     fun findById(id: UUID): User?
     fun createUser(user: User): User
     fun existByEmail(email: String): Boolean
+    fun existById(id: UUID): Boolean
+    fun delete(id: UUID)
 }
