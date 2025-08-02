@@ -4,6 +4,7 @@ import com.omnistore.omnistore_user_service.application.port.out.CustomUserRepos
 import com.omnistore.omnistore_user_service.domain.model.User
 import com.omnistore.omnistore_user_service.infrastructure.mapper.JpaUserMapper
 import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @Repository
@@ -34,6 +35,11 @@ class JpaCustomUserRepository(
 
     override fun delete(id: UUID) {
         jpaUserRepository.deleteById(id)
+    }
+
+    @Transactional
+    override fun updateUser(user: User) {
+        jpaUserRepository.updateUserWithoutPassword(user.id!!, user.name, user.email, user.role)
     }
 
 }

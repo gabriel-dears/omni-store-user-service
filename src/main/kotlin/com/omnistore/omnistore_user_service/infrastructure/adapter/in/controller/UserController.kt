@@ -3,7 +3,9 @@ package com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.control
 import com.omnistore.omnistore_user_service.application.port.`in`.use_case.CreateUserUseCase
 import com.omnistore.omnistore_user_service.application.port.`in`.use_case.DeleteUserUseCase
 import com.omnistore.omnistore_user_service.application.port.`in`.use_case.FindByIdUserUseCase
+import com.omnistore.omnistore_user_service.application.port.`in`.use_case.UpdateUserUseCase
 import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.dto.UserRequestDto
+import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.dto.UserRequestUpdateDto
 import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.dto.UserResponseDto
 import com.omnistore.omnistore_user_service.infrastructure.mapper.DtoUserMapper
 import jakarta.validation.Valid
@@ -16,7 +18,8 @@ import java.util.*
 class UserController(
     private val createUserUseCase: CreateUserUseCase,
     private val findByIdUserUseCase: FindByIdUserUseCase,
-    private val deleteUserUseCase: DeleteUserUseCase
+    private val deleteUserUseCase: DeleteUserUseCase,
+    private val updateUserUseCase: UpdateUserUseCase
 ) {
 
     @GetMapping("/{id}")
@@ -38,6 +41,17 @@ class UserController(
     fun deleteUser(@PathVariable id: UUID): ResponseEntity<Unit> {
         deleteUserUseCase.execute(id)
         return ResponseEntity.noContent().build()
+    }
+
+    @PutMapping("/{id}")
+    fun updateUser(
+        @RequestBody @Valid userRequestUpdateDto: UserRequestUpdateDto,
+        @PathVariable id: UUID
+    ): ResponseEntity<UserResponseDto> {
+        val userResponseAfterCreation = DtoUserMapper.toUser(userRequestUpdateDto, id)
+        val updatedUser = updateUserUseCase.execute(userResponseAfterCreation)
+        val userResponseDto = DtoUserMapper.toUserResponseDto(updatedUser)
+        return ResponseEntity.ok(userResponseDto)
     }
 
 }
