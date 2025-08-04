@@ -1,6 +1,7 @@
 package com.omnistore.omnistore_user_service.application.service
 
 import com.omnistore.omnistore_user_service.application.port.out.CustomUserRepository
+import com.omnistore.omnistore_user_service.application.service.user.DeleteUserUseCaseImpl
 import com.omnistore.omnistore_user_service.domain.exception.UserNotFoundException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

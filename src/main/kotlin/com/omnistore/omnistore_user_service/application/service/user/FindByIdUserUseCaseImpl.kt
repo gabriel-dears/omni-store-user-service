@@ -1,4 +1,4 @@
-package com.omnistore.omnistore_user_service.application.service
+package com.omnistore.omnistore_user_service.application.service.user
 
 import com.omnistore.omnistore_user_service.application.port.`in`.use_case.FindByIdUserUseCase
 import com.omnistore.omnistore_user_service.application.port.out.CustomUserRepository

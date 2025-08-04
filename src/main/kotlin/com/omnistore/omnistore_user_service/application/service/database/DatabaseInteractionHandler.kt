@@ -1,4 +1,4 @@
-package com.omnistore.omnistore_user_service.application.service
+package com.omnistore.omnistore_user_service.application.service.database
 
 import org.slf4j.Logger
 

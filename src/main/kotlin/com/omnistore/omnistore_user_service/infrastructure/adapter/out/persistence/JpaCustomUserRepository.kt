@@ -1,7 +1,7 @@
 package com.omnistore.omnistore_user_service.infrastructure.adapter.out.persistence
 
 import com.omnistore.omnistore_user_service.application.port.out.CustomUserRepository
-import com.omnistore.omnistore_user_service.application.service.UserDatabaseInteractionHandler
+import com.omnistore.omnistore_user_service.application.service.database.UserDatabaseInteractionHandler
 import com.omnistore.omnistore_user_service.domain.model.User
 import com.omnistore.omnistore_user_service.infrastructure.mapper.JpaUserMapper
 import org.springframework.stereotype.Repository

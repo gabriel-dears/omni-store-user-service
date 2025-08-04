@@ -1,4 +1,4 @@
-package com.omnistore.omnistore_user_service.application.service
+package com.omnistore.omnistore_user_service.application.service.database
 
 import com.omnistore.omnistore_user_service.application.port.out.CustomUserRepository
 import com.omnistore.omnistore_user_service.domain.exception.UserDatabaseException

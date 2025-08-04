@@ -5,10 +5,10 @@ import com.omnistore.omnistore_user_service.application.port.`in`.use_case.Delet
 import com.omnistore.omnistore_user_service.application.port.`in`.use_case.FindByIdUserUseCase
 import com.omnistore.omnistore_user_service.application.port.`in`.use_case.UpdateUserUseCase
 import com.omnistore.omnistore_user_service.application.port.out.CustomUserRepository
-import com.omnistore.omnistore_user_service.application.service.CreateUserUseCaseImpl
-import com.omnistore.omnistore_user_service.application.service.DeleteUserUseCaseImpl
-import com.omnistore.omnistore_user_service.application.service.FindByIdUserUseCaseImpl
-import com.omnistore.omnistore_user_service.application.service.UpdateUserUseCaseImpl
+import com.omnistore.omnistore_user_service.application.service.user.CreateUserUseCaseImpl
+import com.omnistore.omnistore_user_service.application.service.user.DeleteUserUseCaseImpl
+import com.omnistore.omnistore_user_service.application.service.user.FindByIdUserUseCaseImpl
+import com.omnistore.omnistore_user_service.application.service.user.UpdateUserUseCaseImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
