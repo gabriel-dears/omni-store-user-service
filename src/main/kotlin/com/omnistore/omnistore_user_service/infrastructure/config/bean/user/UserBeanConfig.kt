@@ -1,9 +1,9 @@
-package com.omnistore.omnistore_user_service.infrastructure.config.bean
+package com.omnistore.omnistore_user_service.infrastructure.config.bean.user
 
-import com.omnistore.omnistore_user_service.application.port.`in`.use_case.CreateUserUseCase
-import com.omnistore.omnistore_user_service.application.port.`in`.use_case.DeleteUserUseCase
-import com.omnistore.omnistore_user_service.application.port.`in`.use_case.FindByIdUserUseCase
-import com.omnistore.omnistore_user_service.application.port.`in`.use_case.UpdateUserUseCase
+import com.omnistore.omnistore_user_service.application.port.`in`.use_case.user.CreateUserUseCase
+import com.omnistore.omnistore_user_service.application.port.`in`.use_case.user.DeleteUserUseCase
+import com.omnistore.omnistore_user_service.application.port.`in`.use_case.user.FindByIdUserUseCase
+import com.omnistore.omnistore_user_service.application.port.`in`.use_case.user.UpdateUserUseCase
 import com.omnistore.omnistore_user_service.application.port.out.CustomUserRepository
 import com.omnistore.omnistore_user_service.application.service.user.CreateUserUseCaseImpl
 import com.omnistore.omnistore_user_service.application.service.user.DeleteUserUseCaseImpl

@@ -1,13 +1,13 @@
 package com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.user
 
-import com.omnistore.omnistore_user_service.application.port.`in`.use_case.CreateUserUseCase
-import com.omnistore.omnistore_user_service.application.port.`in`.use_case.DeleteUserUseCase
-import com.omnistore.omnistore_user_service.application.port.`in`.use_case.FindByIdUserUseCase
-import com.omnistore.omnistore_user_service.application.port.`in`.use_case.UpdateUserUseCase
+import com.omnistore.omnistore_user_service.application.port.`in`.use_case.user.CreateUserUseCase
+import com.omnistore.omnistore_user_service.application.port.`in`.use_case.user.DeleteUserUseCase
+import com.omnistore.omnistore_user_service.application.port.`in`.use_case.user.FindByIdUserUseCase
+import com.omnistore.omnistore_user_service.application.port.`in`.use_case.user.UpdateUserUseCase
 import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.user.dto.UserRequestDto
 import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.user.dto.UserRequestUpdateDto
 import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.user.dto.UserResponseDto
-import com.omnistore.omnistore_user_service.infrastructure.mapper.DtoUserMapper
+import com.omnistore.omnistore_user_service.infrastructure.mapper.user.DtoUserMapper
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping

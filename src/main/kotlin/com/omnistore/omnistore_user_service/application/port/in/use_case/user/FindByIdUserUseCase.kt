@@ -1,4 +1,4 @@
-package com.omnistore.omnistore_user_service.application.port.`in`.use_case
+package com.omnistore.omnistore_user_service.application.port.`in`.use_case.user
 
 import com.omnistore.omnistore_user_service.domain.model.User
 import java.util.UUID

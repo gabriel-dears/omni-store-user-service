@@ -1,4 +1,4 @@
-package com.omnistore.omnistore_user_service.infrastructure.mapper
+package com.omnistore.omnistore_user_service.infrastructure.mapper.user
 
 import com.omnistore.omnistore_user_service.domain.model.Role
 import com.omnistore.omnistore_user_service.domain.model.User

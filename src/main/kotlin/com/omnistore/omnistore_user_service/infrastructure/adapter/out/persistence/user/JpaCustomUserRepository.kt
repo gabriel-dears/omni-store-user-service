@@ -3,7 +3,7 @@ package com.omnistore.omnistore_user_service.infrastructure.adapter.out.persiste
 import com.omnistore.omnistore_user_service.application.port.out.CustomUserRepository
 import com.omnistore.omnistore_user_service.application.service.database.UserDatabaseInteractionHandler
 import com.omnistore.omnistore_user_service.domain.model.User
-import com.omnistore.omnistore_user_service.infrastructure.mapper.JpaUserMapper
+import com.omnistore.omnistore_user_service.infrastructure.mapper.user.JpaUserMapper
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
