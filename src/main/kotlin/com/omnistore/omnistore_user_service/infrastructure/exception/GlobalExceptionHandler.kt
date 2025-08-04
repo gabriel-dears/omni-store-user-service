@@ -1,10 +1,12 @@
 package com.omnistore.omnistore_user_service.infrastructure.exception
 
+import com.fasterxml.jackson.databind.exc.MismatchedInputException
 import com.omnistore.omnistore_user_service.domain.exception.EmailAlreadyExistsException
 import com.omnistore.omnistore_user_service.domain.exception.UserNotFoundException
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.validation.FieldError
 import org.springframework.validation.ObjectError
 import org.springframework.web.bind.MethodArgumentNotValidException
@@ -101,6 +103,34 @@ class GlobalExceptionHandler {
             }
         }
         return message
+    }
+
+
+    @ExceptionHandler(HttpMessageNotReadableException::class)
+    fun handleHttpMessageNotReadableException(
+        ex: HttpMessageNotReadableException,
+        request: HttpServletRequest
+    ): ResponseEntity<ErrorResponseDto> {
+        val rootCause = ex.rootCause
+        val message = if (rootCause is MismatchedInputException) {
+            val field = rootCause.path?.firstOrNull()?.fieldName
+            if (field != null) {
+                "Missing or null mandatory field: '$field'"
+            } else {
+                "Malformed JSON: ${rootCause.originalMessage}"
+            }
+        } else {
+            "Invalid request body: ${ex.message}"
+        }
+
+        val errorResponse = ErrorResponseDto(
+            status = 400,
+            message = listOf(message),
+            path = request.requestURI,
+            timestamp = System.currentTimeMillis().toString()
+        )
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse)
     }
 
 }
