@@ -1,4 +1,4 @@
-package com.omnistore.omnistore_user_service.infrastructure.adapter.out.persistence
+package com.omnistore.omnistore_user_service.infrastructure.adapter.out.persistence.user
 
 import com.omnistore.omnistore_user_service.domain.model.Role
 import jakarta.persistence.*

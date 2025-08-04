@@ -2,9 +2,9 @@ package com.omnistore.omnistore_user_service.infrastructure.mapper
 
 import com.omnistore.omnistore_user_service.domain.model.Role
 import com.omnistore.omnistore_user_service.domain.model.User
-import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.dto.UserRequestDto
-import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.dto.UserRequestUpdateDto
-import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.dto.UserResponseDto
+import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.user.dto.UserRequestDto
+import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.user.dto.UserRequestUpdateDto
+import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.user.dto.UserResponseDto
 import java.util.UUID
 
 

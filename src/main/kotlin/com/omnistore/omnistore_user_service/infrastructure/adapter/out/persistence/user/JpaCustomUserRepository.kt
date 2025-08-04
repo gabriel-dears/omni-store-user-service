@@ -1,4 +1,4 @@
-package com.omnistore.omnistore_user_service.infrastructure.adapter.out.persistence
+package com.omnistore.omnistore_user_service.infrastructure.adapter.out.persistence.user
 
 import com.omnistore.omnistore_user_service.application.port.out.CustomUserRepository
 import com.omnistore.omnistore_user_service.application.service.database.UserDatabaseInteractionHandler

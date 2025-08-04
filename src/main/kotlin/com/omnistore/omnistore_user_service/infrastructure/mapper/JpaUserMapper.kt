@@ -1,7 +1,7 @@
 package com.omnistore.omnistore_user_service.infrastructure.mapper
 
 import com.omnistore.omnistore_user_service.domain.model.User
-import com.omnistore.omnistore_user_service.infrastructure.adapter.out.persistence.JpaUserEntity
+import com.omnistore.omnistore_user_service.infrastructure.adapter.out.persistence.user.JpaUserEntity
 
 object JpaUserMapper {
     fun toEntity(user: User): JpaUserEntity {

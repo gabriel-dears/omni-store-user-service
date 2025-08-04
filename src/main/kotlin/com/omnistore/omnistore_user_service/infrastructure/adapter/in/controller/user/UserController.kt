@@ -1,17 +1,24 @@
-package com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller
+package com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.user
 
 import com.omnistore.omnistore_user_service.application.port.`in`.use_case.CreateUserUseCase
 import com.omnistore.omnistore_user_service.application.port.`in`.use_case.DeleteUserUseCase
 import com.omnistore.omnistore_user_service.application.port.`in`.use_case.FindByIdUserUseCase
 import com.omnistore.omnistore_user_service.application.port.`in`.use_case.UpdateUserUseCase
-import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.dto.UserRequestDto
-import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.dto.UserRequestUpdateDto
-import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.dto.UserResponseDto
+import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.user.dto.UserRequestDto
+import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.user.dto.UserRequestUpdateDto
+import com.omnistore.omnistore_user_service.infrastructure.adapter.`in`.controller.user.dto.UserResponseDto
 import com.omnistore.omnistore_user_service.infrastructure.mapper.DtoUserMapper
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
-import java.util.*
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+import java.util.UUID
 
 @RestController
 @RequestMapping("users")
