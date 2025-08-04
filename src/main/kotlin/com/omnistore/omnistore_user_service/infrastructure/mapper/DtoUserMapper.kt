@@ -29,9 +29,6 @@ object DtoUserMapper {
     }
 
     fun toUser(userRequestUpdateDto: UserRequestUpdateDto, id: UUID): User {
-
-
-
         return User(
             id = id,
             name = userRequestUpdateDto.name,
