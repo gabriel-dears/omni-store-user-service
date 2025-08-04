@@ -1,6 +1,7 @@
 package com.omnistore.omnistore_user_service.infrastructure.adapter.out.persistence
 
 import com.omnistore.omnistore_user_service.application.port.out.CustomUserRepository
+import com.omnistore.omnistore_user_service.application.service.UserDatabaseInteractionHandler
 import com.omnistore.omnistore_user_service.domain.model.User
 import com.omnistore.omnistore_user_service.infrastructure.mapper.JpaUserMapper
 import org.springframework.stereotype.Repository
@@ -13,33 +14,46 @@ class JpaCustomUserRepository(
 ) : CustomUserRepository {
 
     override fun findById(id: UUID): User? {
-        return jpaUserRepository
-            .findById(id)
-            .map { JpaUserMapper.toDomain(it) }
-            .orElse(null)
+        return UserDatabaseInteractionHandler.handleDatabaseInteraction {
+            jpaUserRepository
+                .findById(id)
+                .map { JpaUserMapper.toDomain(it) }
+                .orElse(null)
+        }
     }
 
     override fun createUser(user: User): User {
-        val jpaUserEntity = JpaUserMapper.toEntity(user)
-        val createdJpaUserEntity = jpaUserRepository.save(jpaUserEntity)
-        return JpaUserMapper.toDomain(createdJpaUserEntity)
+        return UserDatabaseInteractionHandler.handleDatabaseInteraction {
+            val jpaUserEntity = JpaUserMapper.toEntity(user)
+            val createdJpaUserEntity = jpaUserRepository.save(jpaUserEntity)
+            JpaUserMapper.toDomain(createdJpaUserEntity)
+        }
     }
 
     override fun existByEmail(email: String): Boolean {
-        return jpaUserRepository.existsByEmail(email)
+        return UserDatabaseInteractionHandler.handleDatabaseInteraction {
+            jpaUserRepository.existsByEmail(email)
+        }
     }
 
     override fun existById(id: UUID): Boolean {
-        return jpaUserRepository.existsById(id)
+        return UserDatabaseInteractionHandler.handleDatabaseInteraction {
+            jpaUserRepository.existsById(id)
+        }
     }
 
     override fun delete(id: UUID) {
-        jpaUserRepository.deleteById(id)
+        UserDatabaseInteractionHandler.handleDatabaseInteraction {
+            jpaUserRepository.deleteById(id)
+        }
     }
 
     @Transactional
     override fun updateUser(user: User) {
-        jpaUserRepository.updateUserWithoutPassword(user.id!!, user.name, user.email, user.role)
+        UserDatabaseInteractionHandler.handleDatabaseInteraction {
+            jpaUserRepository.updateUserWithoutPassword(user.id!!, user.name, user.email, user.role)
+        }
     }
+
 
 }
